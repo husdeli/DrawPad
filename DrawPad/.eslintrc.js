@@ -5,10 +5,10 @@ module.exports = {
   },
   extends: [
     "preact",
-    "prettier",
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:import/typescript",
+    "prettier",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -18,8 +18,9 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["@typescript-eslint", "import"],
+  plugins: ["@typescript-eslint", "import", "prettier"],
   rules: {
+    "no-undef": "off",
     "import/prefer-default-export": "off",
     "jest/no-deprecated-functions": "off",
     "import/extensions": [
@@ -32,6 +33,7 @@ module.exports = {
         tsx: "never",
       },
     ],
+    "prettier/prettier": ["error"],
   },
   settings: {
     "import/parsers": {
