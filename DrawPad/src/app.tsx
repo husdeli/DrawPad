@@ -4,7 +4,7 @@ export function App() {
   return (
     <>
       <Logo />
-      <p>Hello Vite + Preact!</p>
+      <p>Hello World Vite + Preact!</p>
       <p>
         <a
           class="link"
