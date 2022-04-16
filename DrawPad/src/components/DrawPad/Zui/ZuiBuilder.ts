@@ -1,6 +1,10 @@
 import Two from "two.js";
 import ZUI from "@libs/zui";
-import { CustomZoomEvent, EventManager } from "../EventManager/EventManager";
+import {
+  CustomDragEvent,
+  CustomZoomEvent,
+  EventManager,
+} from "../EventManager/EventManager";
 
 export class ZuiBuilder {
   private readonly domElement;
@@ -10,6 +14,7 @@ export class ZuiBuilder {
 
   constructor(
     private readonly two: Two,
+    private readonly eventManager: EventManager,
     private readonly onZoom: () => void = () => undefined
   ) {
     this.domElement = this.two.renderer.domElement;
@@ -19,10 +24,13 @@ export class ZuiBuilder {
     const zui = new ZUI(this.two.renderer.scene);
     zui.addLimits(this.MIN_ZOOM, this.MAX_ZOOM);
 
-    const manager = new EventManager(this.domElement);
-    manager.on<CustomZoomEvent>("ZOOM", ({ diff, originalEvent }) => {
-      zui.zoomBy(diff, originalEvent.clientX, originalEvent.clientY);
+    this.eventManager.on<CustomZoomEvent>("ZOOM", ({ diff, x, y }) => {
+      zui.zoomBy(diff, x, y);
       this.onZoom();
+    });
+
+    this.eventManager.on<CustomDragEvent>("DRAG", ({ deltaX, deltaY }) => {
+      zui.translateSurface(deltaX, deltaY);
     });
   }
 }
