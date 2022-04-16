@@ -4,11 +4,10 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    "preact",
+    "prettier",
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:import/typescript",
-    "prettier",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -18,7 +17,7 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["@typescript-eslint", "import", "prettier"],
+  plugins: ["prettier", "@typescript-eslint", "import"],
   rules: {
     "no-undef": "off",
     "import/prefer-default-export": "off",
