@@ -1,20 +1,24 @@
-import { Logo } from './logo'
+import { h } from "preact";
+import { useEffect, useRef, useState } from "preact/hooks";
+import { DrawPad } from "./components";
 
 export function App() {
+  const [container, setContainer] = useState<HTMLElement | null>(null);
+
+  const containerRef = useRef<null | HTMLElement>(null);
+
+  useEffect(() => {
+    setContainer(containerRef.current);
+    return () => setContainer(null);
+  }, [containerRef.current]);
+
   return (
     <>
-      <Logo />
-      <p>Hello World Vite + Preact!</p>
-      <p>
-        <a
-          class="link"
-          href="https://preactjs.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Preact
-        </a>
-      </p>
+      <header />
+      <main ref={containerRef} class="bg-white h-full w-full">
+        {container && <DrawPad container={container} />}
+      </main>
+      <footer />
     </>
-  )
+  );
 }

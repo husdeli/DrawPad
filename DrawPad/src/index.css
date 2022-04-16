@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
   height: 100%;
@@ -7,9 +11,6 @@ body {
   background: #fafafa;
   font-family: 'Helvetica Neue', arial, sans-serif;
   font-weight: 400;
-  color: #444;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
@@ -20,11 +21,4 @@ body {
   height: 100%;
   text-align: center;
   background-color: #673ab8;
-  color: #fff;
-  font-size: 1.5em;
-  padding-top: 100px;
-}
-
-.link {
-  color: #fff;
 }
