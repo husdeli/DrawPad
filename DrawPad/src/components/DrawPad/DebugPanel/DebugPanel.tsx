@@ -1,5 +1,5 @@
 import { h } from "preact";
-import { useLogger } from "../hooks/useLogger";
+import { useLogger } from "../Hooks/useLogger";
 
 export function DebugPanel() {
   const { queue, clear } = useLogger();
