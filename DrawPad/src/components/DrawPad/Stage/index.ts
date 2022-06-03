@@ -1,7 +1,5 @@
 import Two from "two.js";
-import { initializeHammer } from "../EventsManagers/Hammer";
 import { GridBuilder } from "../Grid";
-import { initializeZui } from "../Zui";
 
 const twoInst = new Two({
   fitted: true,
@@ -9,15 +7,18 @@ const twoInst = new Two({
 });
 let container: HTMLElement;
 
-export const build = (_container: HTMLElement) => {
+export const buildStage = (_container: HTMLElement) => {
   container = _container;
   twoInst.appendTo(container);
   const stage = new Two.Group();
   const gridBuilder = new GridBuilder(twoInst);
-  const hammer = initializeHammer(twoInst.renderer.domElement);
-  initializeZui(twoInst, hammer);
   gridBuilder.build(stage);
   twoInst.add(stage);
+
+  return {
+    twoInst,
+    stage,
+  };
 };
 
 export const destroy = () => {

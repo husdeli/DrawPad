@@ -1,6 +1,15 @@
 import { useEffect } from "preact/hooks";
 import { memo } from "preact/compat";
-import { build, destroy } from "./Stage";
+import { buildStage, destroy } from "./Stage";
+import { initializeZui } from "./Zui";
+import { initializeHammer } from "@libs/hammer";
+import { ZuiEvents } from "./Zui/ZuiEvents";
+import {
+  TouchEvents,
+  WheelEvents,
+  KeyboardEvents,
+  MouseEvents,
+} from "./EventsManagers";
 
 interface Props {
   container: HTMLElement;
@@ -9,7 +18,23 @@ interface Props {
 export const DrawPad = memo(
   ({ container }: Props) => {
     useEffect(() => {
-      build(container);
+      const { twoInst } = buildStage(container);
+      const hammer = initializeHammer(twoInst.renderer.domElement);
+      const zui = initializeZui(twoInst, hammer);
+
+      const touchEvents = new TouchEvents(hammer);
+      const wheelEvents = new WheelEvents(twoInst.renderer.domElement);
+      const keyboardEvents = new KeyboardEvents(window);
+      const mouseEvents = new MouseEvents(window);
+
+      new ZuiEvents(
+        zui,
+        keyboardEvents,
+        mouseEvents,
+        wheelEvents,
+        touchEvents,
+        container
+      );
       return () => {
         destroy();
       };

@@ -8,6 +8,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@libs/zui": resolve(__dirname, "./libs/zui"),
+      "@libs/hammer": resolve(__dirname, "./libs/hammer"),
     },
   },
 });
