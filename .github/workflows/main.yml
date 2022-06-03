@@ -28,10 +28,6 @@ jobs:
         with:
           node-version: 14
 
-      - name: Test
-        run: |
-          cd ./DrawPad 
-          yarn run test
       # Runs a single command using the runners shell
       - name: Build
         run: |
