@@ -1,2 +1,4 @@
 # DrawPad
-Use your smartphone in combination with a web application to draw whatever you want and show it in realtime.
+
+## What is it?
+Free drawing tool. Create rooms, draw and share canvas by a link. Use your smartphone to draw as well.
