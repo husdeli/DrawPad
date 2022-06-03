@@ -30,4 +30,4 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Build
-        run: yarn run build
+        run: cd ./DrawPad && yarn run build
