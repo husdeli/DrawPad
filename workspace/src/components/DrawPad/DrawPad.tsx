@@ -11,6 +11,8 @@ import {
   MouseEvents,
 } from "./EventsManagers";
 
+import "./index.css";
+
 interface Props {
   container: HTMLElement;
 }
