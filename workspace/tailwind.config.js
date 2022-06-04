@@ -4,7 +4,8 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     fontFamily: {
-      serif: ["Roboto", "sans-serif"],
+      sans: ["Alegreya Sans SC", "sans-serif"],
+      serif: ["Alegreya Sans SC", "serif"],
     },
     extend: {
       colors: {

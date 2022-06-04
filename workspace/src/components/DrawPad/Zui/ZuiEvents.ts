@@ -10,7 +10,8 @@ import {
 import { TouchEvents } from "../EventsManagers/TouchEvents";
 import { WheelEvents } from "../EventsManagers/WheelEvents";
 
-const DRAG_CURSOR_CLASS = "dragged";
+const GRAB_CURSOR_CLASS = "grab";
+const GRABBING_CURSOR_CLASS = "grabbing";
 
 export class ZuiEvents {
   private translateSurfaceAction;
@@ -33,6 +34,7 @@ export class ZuiEvents {
     // Translate surface on Space + MouseDrag
     this.keyboardEvents.registerSpaceLock(
       () => {
+        this.container.classList.add(GRAB_CURSOR_CLASS);
         this.mouseEvents.registerMouseDrag(
           this.onMouseDragStart,
           this.onMouseDrag,
@@ -40,6 +42,8 @@ export class ZuiEvents {
         );
       },
       () => {
+        this.container.classList.remove(GRAB_CURSOR_CLASS);
+        this.container.classList.remove(GRABBING_CURSOR_CLASS);
         this.mouseEvents.unregisterMouseDrag({
           start: this.onMouseDragStart,
           update: this.onMouseDrag,
@@ -61,8 +65,12 @@ export class ZuiEvents {
   };
 
   private onMouseDragStart = (e: EventPayload) => {
-    this.container.classList.add(DRAG_CURSOR_CLASS);
+    this.container.classList.remove(GRAB_CURSOR_CLASS);
+    this.container.classList.add(GRABBING_CURSOR_CLASS);
   };
 
-  private onMouseDragFinish = (e: EventPayload) => {};
+  private onMouseDragFinish = (e: EventPayload) => {
+    this.container.classList.add(GRAB_CURSOR_CLASS);
+    this.container.classList.remove(GRABBING_CURSOR_CLASS);
+  };
 }

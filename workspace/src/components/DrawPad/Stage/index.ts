@@ -2,6 +2,7 @@ import Two from "two.js";
 import { GridBuilder } from "../Grid";
 
 const twoInst = new Two({
+  type: Two.Types.canvas,
   fitted: true,
   autostart: true,
 });
