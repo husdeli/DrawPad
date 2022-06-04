@@ -1,7 +1,11 @@
 import { h } from "preact";
-import { useEffect, useRef, useState } from "preact/hooks";
+import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 import { DrawPad } from "./components";
-import { LoggerProvider } from "./components/DrawPad/Logger/logger.provider";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { MainPage } from "./components/MainPage/MainPage";
+import { CANVAS_ROUTE, HOME } from "./routing";
+
+const sessionId = window.crypto.randomUUID();
 
 export function App() {
   const [container, setContainer] = useState<HTMLElement | null>(null);
@@ -13,12 +17,26 @@ export function App() {
   }, [containerRef.current]);
 
   return (
-    <LoggerProvider>
+    <>
       <header />
-      <main ref={containerRef} class="bg-white h-full w-full">
-        {container && <DrawPad container={container} />}
+
+      <main ref={containerRef} class="bg-slate-50 h-full w-full">
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path={HOME}
+              element={<MainPage title="Draw pad" sessionId={sessionId} />}
+            />
+
+            <Route
+              path={`${CANVAS_ROUTE}/:sessionId`}
+              element={container && <DrawPad container={container} />}
+            />
+          </Routes>
+        </BrowserRouter>
       </main>
+
       <footer />
-    </LoggerProvider>
+    </>
   );
 }
