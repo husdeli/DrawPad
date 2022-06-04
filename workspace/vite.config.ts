@@ -8,6 +8,8 @@ export default defineConfig({
   plugins: [preact()],
   resolve: {
     alias: {
+      react: "preact/compat",
+      "react-dom": "preact/compat",
       "@libs/zui": resolve(__dirname, "./libs/zui"),
       "@libs/hammer": resolve(__dirname, "./libs/hammer"),
     },
