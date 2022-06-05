@@ -1,6 +1,6 @@
 import { ZUI } from "two.js/extras/jsm/zui";
-import { getTranslateSurfaceAction } from "../Events/TranslateSurface";
-import { getZoomAction } from "../Events/Zoom";
+import { getTranslateSurfaceAction } from "./Events/TranslateSurface";
+import { getZoomAction } from "./Events/Zoom";
 import { KeyboardEvents } from "../EventsManagers/KeyboardEvents";
 import {
   EventPayload,
