@@ -14,8 +14,14 @@ export type MouseDragStart = (e: EventPayload) => void;
 export type MouseDragUpdate = (e: EventPayload & MouseDragExtra) => void;
 export type MouseDragFinish = (e: EventPayload) => void;
 
+let mouseMoveCache = null;
+
 export class MouseEvents {
   private _onMouseMove: Mousemove[] = [];
+  set onMouseMove(value: Mousemove[]) {
+    this._onMouseMove = value;
+    this.onMouseMoveComposed = compose(...this._onMouseMove);
+  }
 
   private _onMouseDragStart: MouseDragStart[] = [];
   private _onMouseDragUpdate: MouseDragUpdate[] = [];
@@ -23,9 +29,9 @@ export class MouseEvents {
 
   private _mouseLock = false;
 
-  private get onMouseMove() {
-    return compose(...this._onMouseMove);
-  }
+  private onMouseMoveComposed: (...args: unknown[]) => void = (
+    ...args: unknown[]
+  ) => undefined;
 
   private get onMouseDragStart() {
     return compose(...this._onMouseDragStart);
@@ -44,13 +50,13 @@ export class MouseEvents {
   }
 
   registerMouseDrag = (
-    start: MouseDragStart,
-    update: MouseDragUpdate,
-    finish: MouseDragFinish
+    start?: MouseDragStart,
+    update?: MouseDragUpdate,
+    finish?: MouseDragFinish
   ) => {
-    this._onMouseDragStart.push(start);
-    this._onMouseDragUpdate.push(update);
-    this._onMouseDragFinish.push(finish);
+    start && this._onMouseDragStart.push(start);
+    update && this._onMouseDragUpdate.push(update);
+    finish && this._onMouseDragFinish.push(finish);
   };
 
   unregisterMouseDrag = ({
@@ -80,12 +86,12 @@ export class MouseEvents {
   };
 
   registerMouseMove = (cb: Mousemove) => {
-    this._onMouseMove.push(cb);
+    this.onMouseMove = [...this._onMouseMove, cb];
   };
 
   unregisterMouseMove = (cb: Mousemove) => {
     if (cb) {
-      this._onMouseMove = this._onMouseMove.filter((_cb) => cb !== _cb);
+      this.onMouseMove = this._onMouseMove.filter((_cb) => cb !== _cb);
     }
   };
 
@@ -133,7 +139,7 @@ export class MouseEvents {
 
   private subscribeOnMouseMove = () => {
     const onMouseMove = (event: MouseEvent) => {
-      this.onMouseMove({ originalEvent: event });
+      this.onMouseMoveComposed({ originalEvent: event });
     };
     this.element.addEventListener("mousemove", onMouseMove);
     return () => this.element.removeEventListener("mousemove", onMouseMove);

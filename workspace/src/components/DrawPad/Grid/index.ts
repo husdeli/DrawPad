@@ -23,10 +23,6 @@ export class GridBuilder {
     const positionX = width / 2;
     const positionY = height / 2;
     const paddingModifier = 10;
-    // Center point
-    const circle = new Two.Circle(positionX, positionY, 10);
-    circle.noStroke().fill = "red";
-    grid.add(circle);
     // Horizontal
     const hCount = (height * paddingModifier) / size;
     for (let i = 0; i <= hCount; i++) {

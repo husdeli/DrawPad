@@ -5,6 +5,12 @@ export class KeyboardEvents {
   private _onSpaceLock: SpaceLockStart = () => undefined;
   private _onSpaceUnlock: SpaceLockFinish = () => undefined;
 
+  private _spaceLocked = false;
+
+  get spaceLocked() {
+    return this._spaceLocked;
+  }
+
   constructor(private element: Window) {
     this.initialize();
   }
@@ -21,18 +27,16 @@ export class KeyboardEvents {
   private subscribeOnSpaceLock = () => {
     const eventKey = " ";
 
-    let spaceLocked = false;
-
     const onKeyDown = (event: KeyboardEvent) => {
       // Space pressed - start event
-      if (!spaceLocked && event.key === eventKey) {
-        spaceLocked = true;
+      if (!this._spaceLocked && event.key === eventKey) {
+        this._spaceLocked = true;
         this._onSpaceLock();
 
         const onKeyUp = (event: KeyboardEvent) => {
           // Space unpressed - finish event
           if (event.key === eventKey) {
-            spaceLocked = false;
+            this._spaceLocked = false;
             this._onSpaceUnlock();
             this.element.removeEventListener("keyup", onKeyUp);
           }
