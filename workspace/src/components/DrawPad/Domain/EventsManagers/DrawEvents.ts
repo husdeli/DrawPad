@@ -1,7 +1,7 @@
 import Two from "two.js";
 import { ZUI } from "two.js/extras/jsm/zui";
-import { getDrawCurveEvent } from "../../Events";
-import { KeyboardEvents, MouseEvents } from "../../EventsManagers";
+import { getDrawCurveEvent } from "../Events";
+import { KeyboardEvents, MouseEvents } from "../../Core/EventsManagers";
 
 export class DrawEvents {
   private _drawCurve;

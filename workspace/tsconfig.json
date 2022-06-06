@@ -20,10 +20,10 @@
     "jsxFragmentFactory": "Fragment",
     "strictNullChecks": true,
     "paths": {
-      "@libs/zui": ["libs/zui"],
-      "@libs/hammer": ["libs/hammer"],
+      "@libs/Zui": ["libs/Zui"],
+      "@libs/Hammer": ["libs/Hammer"],
     }
   },
-  "include": ["src", "libs/hammer/index.ts"],
+  "include": ["src", "libs"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

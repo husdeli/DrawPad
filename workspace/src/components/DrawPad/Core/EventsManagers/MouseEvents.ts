@@ -1,4 +1,4 @@
-import { compose } from "../../../utils/compose";
+import { compose } from "../../../../utils/compose";
 
 export interface EventPayload<T = MouseEvent> {
   originalEvent: T;
