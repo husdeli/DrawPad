@@ -1,15 +1,14 @@
-import { useEffect } from "preact/hooks";
+import { useMemo } from "preact/hooks";
 import { memo } from "preact/compat";
-import { buildStage, destroy } from "./Stage";
-import { initializeZui } from "./Zui";
+import { buildStage, destroy } from "./Domain/Components/Stage";
 import { initializeHammer } from "@libs/hammer";
-import { ZuiEvents } from "./Zui/ZuiEvents";
+import { ZuiEvents, initializeZui, DrawEvents } from "./Domain";
 import {
   TouchEvents,
   WheelEvents,
   KeyboardEvents,
   MouseEvents,
-} from "./EventsManagers";
+} from "./Core/EventsManagers";
 
 import "./index.css";
 
@@ -19,7 +18,7 @@ interface Props {
 
 export const DrawPad = memo(
   ({ container }: Props) => {
-    useEffect(() => {
+    useMemo(() => {
       const { twoInst } = buildStage(container);
       const hammer = initializeHammer(twoInst.renderer.domElement);
       const zui = initializeZui(twoInst, hammer);
@@ -37,7 +36,10 @@ export const DrawPad = memo(
         touchEvents,
         container
       );
+
+      new DrawEvents(twoInst, mouseEvents, keyboardEvents, zui);
       return () => {
+        // TODO: Check for memory leaks
         destroy();
       };
     }, [container]);

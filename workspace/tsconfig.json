@@ -24,6 +24,6 @@
       "@libs/hammer": ["libs/hammer"],
     }
   },
-  "include": ["src", "libs/hammer/index.ts"],
+  "include": ["src", "libs"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

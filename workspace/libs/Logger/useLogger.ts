@@ -3,8 +3,8 @@ import {
   loggerClearAction,
   loggerPushAction,
   loggerShiftAction,
-} from "../Logger/logger.actions";
-import { LoggerContext } from "../Logger/logger.context";
+} from "./logger.actions";
+import { LoggerContext } from "./logger.context";
 
 export function useLogger() {
   const context = useContext(LoggerContext);

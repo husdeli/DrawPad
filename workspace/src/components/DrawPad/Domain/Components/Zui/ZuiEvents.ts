@@ -1,14 +1,14 @@
 import { ZUI } from "two.js/extras/jsm/zui";
-import { getTranslateSurfaceAction } from "../Events/TranslateSurface";
-import { getZoomAction } from "../Events/Zoom";
-import { KeyboardEvents } from "../EventsManagers/KeyboardEvents";
+import { getTranslateSurfaceAction } from "./Events/TranslateSurface";
+import { getZoomAction } from "./Events/Zoom";
 import {
+  KeyboardEvents,
   EventPayload,
   MouseDragExtra,
   MouseEvents,
-} from "../EventsManagers/MouseEvents";
-import { TouchEvents } from "../EventsManagers/TouchEvents";
-import { WheelEvents } from "../EventsManagers/WheelEvents";
+  TouchEvents,
+  WheelEvents,
+} from "../../../Core";
 
 const GRAB_CURSOR_CLASS = "grab";
 const GRABBING_CURSOR_CLASS = "grabbing";
