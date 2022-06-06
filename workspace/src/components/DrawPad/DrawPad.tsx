@@ -1,7 +1,7 @@
 import { useMemo } from "preact/hooks";
 import { memo } from "preact/compat";
 import { buildStage, destroy } from "./Domain/Components/Stage";
-import { initializeHammer } from "@libs/Hammer";
+import { initializeHammer } from "@libs/hammer";
 import { ZuiEvents, initializeZui, DrawEvents } from "./Domain";
 import {
   TouchEvents,

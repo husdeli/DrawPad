@@ -20,8 +20,8 @@
     "jsxFragmentFactory": "Fragment",
     "strictNullChecks": true,
     "paths": {
-      "@libs/Zui": ["libs/Zui"],
-      "@libs/Hammer": ["libs/Hammer"],
+      "@libs/zui": ["libs/zui"],
+      "@libs/hammer": ["libs/hammer"],
     }
   },
   "include": ["src", "libs"],

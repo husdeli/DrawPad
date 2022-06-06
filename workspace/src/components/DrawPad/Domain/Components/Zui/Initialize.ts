@@ -1,5 +1,5 @@
 import Two from "two.js";
-import ZUI from "@libs/Zui";
+import ZUI from "@libs/zui";
 
 const MAX_ZOOM = 8;
 const MIN_ZOOM = 0.06;
